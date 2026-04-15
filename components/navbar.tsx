@@ -1,34 +1,25 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useAuth } from '@/lib/auth-context'
-import { useCart } from '@/lib/cart-context'
-import { Button } from '@/components/ui/button'
-import {
-  ShoppingBag,
-  User,
-  Menu,
-  X,
-  Search,
-  Heart,
-  LogOut,
-  LayoutDashboard,
-} from 'lucide-react'
-import { useState } from 'react'
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
+import { useCart } from "@/lib/cart-context";
+import { Button } from "@/components/ui/button";
+import { LuShoppingBag as ShoppingBag, LuUser as User, LuMenu as Menu, LuX as X, LuSearch as Search, LuHeart as Heart, LuLogOut as LogOut, LuLayoutDashboard as LayoutDashboard } from "react-icons/lu";
+import { useState } from "react";
 
 export function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth()
-  const { itemCount } = useCart()
-  const pathname = usePathname()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth();
+  const { itemCount } = useCart();
+  const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/customer', label: 'Home' },
-    { href: '/customer/products', label: 'Shop' },
-  ]
+    { href: "/customer", label: "Home" },
+    { href: "/customer/products", label: "Shop" },
+  ];
 
-  const isActive = (href: string) => pathname === href
+  const isActive = (href: string) => pathname === href;
 
   return (
     <header className="sticky top-0 z-50 glass border-b border-white/20">
@@ -38,7 +29,7 @@ export function Navbar() {
           <Link href="/customer" className="flex items-center gap-2 group">
             <span className="text-2xl">🌸</span>
             <span className="font-serif text-xl lg:text-2xl font-bold text-gradient">
-              Petal & Bloom
+              Flowers Your Way
             </span>
           </Link>
 
@@ -50,8 +41,8 @@ export function Navbar() {
                   variant="ghost"
                   className={`text-sm font-medium transition-all duration-200 ${
                     isActive(link.href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground/70 hover:text-foreground hover:bg-primary/5"
                   }`}
                 >
                   {link.label}
@@ -72,7 +63,7 @@ export function Navbar() {
                 <ShoppingBag className="w-5 h-5" />
                 {itemCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center animate-fade-in-up">
-                    {itemCount > 99 ? '99+' : itemCount}
+                    {itemCount > 99 ? "99+" : itemCount}
                   </span>
                 )}
               </Button>
@@ -80,7 +71,7 @@ export function Navbar() {
 
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
-                {user?.role === 'admin' && (
+                {user?.role === "admin" && (
                   <Link href="/admin">
                     <Button
                       variant="ghost"
@@ -135,7 +126,7 @@ export function Navbar() {
                 <ShoppingBag className="w-5 h-5" />
                 {itemCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {itemCount > 99 ? '99+' : itemCount}
+                    {itemCount > 99 ? "99+" : itemCount}
                   </span>
                 )}
               </Button>
@@ -168,7 +159,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   className={`w-full justify-start text-base ${
-                    isActive(link.href) ? 'bg-primary/10 text-primary' : ''
+                    isActive(link.href) ? "bg-primary/10 text-primary" : ""
                   }`}
                 >
                   {link.label}
@@ -183,14 +174,23 @@ export function Navbar() {
                     href="/customer/account"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Button variant="ghost" className="w-full justify-start gap-2">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start gap-2"
+                    >
                       <User className="w-4 h-4" />
                       My Account
                     </Button>
                   </Link>
-                  {user?.role === 'admin' && (
-                    <Link href="/admin" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start gap-2">
+                  {user?.role === "admin" && (
+                    <Link
+                      href="/admin"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start gap-2"
+                      >
                         <LayoutDashboard className="w-4 h-4" />
                         Admin Dashboard
                       </Button>
@@ -200,8 +200,8 @@ export function Navbar() {
                     variant="ghost"
                     className="w-full justify-start gap-2 text-destructive"
                     onClick={() => {
-                      logout()
-                      setMobileMenuOpen(false)
+                      logout();
+                      setMobileMenuOpen(false);
                     }}
                   >
                     <LogOut className="w-4 h-4" />
@@ -231,5 +231,5 @@ export function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }
