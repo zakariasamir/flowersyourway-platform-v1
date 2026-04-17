@@ -6,11 +6,20 @@ import { CartProvider } from "@/lib/cart-context";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Petal & Bloom — Premium Flower Delivery",
+  title: "Flowers Your Way — Premium Flower Delivery",
   description:
     "Discover stunning hand-crafted floral arrangements. Fresh flowers for every occasion, delivered with care. Shop roses, tulips, lilies, sunflowers & more.",
-  keywords: ["flowers", "bouquets", "flower delivery", "roses", "tulips", "floral arrangements"],
+  keywords: [
+    "flowers",
+    "bouquets",
+    "flower delivery",
+    "roses",
+    "tulips",
+    "floral arrangements",
+  ],
 };
+
+import { LanguageProvider } from "@/lib/language-context";
 
 export default function RootLayout({
   children,
@@ -20,10 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -34,21 +40,23 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased">
-        <AuthProvider>
-          <CartProvider>
-            {children}
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                style: {
-                  fontFamily: "var(--font-sans)",
-                  borderRadius: "12px",
-                },
-              }}
-            />
-          </CartProvider>
-        </AuthProvider>
+      <body className="font-sans antialiased" suppressHydrationWarning>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+              {children}
+              <Toaster
+                position="bottom-right"
+                toastOptions={{
+                  style: {
+                    fontFamily: "var(--font-sans)",
+                    borderRadius: "12px",
+                  },
+                }}
+              />
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
