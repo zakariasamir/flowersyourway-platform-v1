@@ -95,7 +95,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Geist', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Cairo', 'Geist', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'Geist Mono', monospace;
   --color-background: var(--background);
